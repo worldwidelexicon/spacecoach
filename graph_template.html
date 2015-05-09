@@ -1,0 +1,107 @@
+<html>
+<head><title>Graph</title></head>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<body>
+
+<div id="container" style="min-width: 800px; height: 600px; margin: 0 auto"></div>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        lang: {
+            decimalPoint: '.',
+            thousandsSep: ','
+        },
+        chart: {
+            type: 'spline',
+            inverted: false
+        },
+        title: {
+            text: 'Cost Per Mission Vs Isp'
+        },
+        subtitle: {
+            text: '{{ subtitle }}'
+        },
+        xAxis: {
+            reversed: false,
+            title: {
+                enabled: true,
+                text: 'Specific Impulse (Isp)'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value + 's';
+                }
+            },
+            maxPadding: 0.05,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: '$/mission'
+            },
+            type: 'logarithmic',
+            pointFormat: "Value: {point.y:,.0f}",
+            labels: {
+                format: '{value:,.0f}',
+                // formatter: function () {
+                //    return this.value.toExponential(2);
+                //}
+            },
+            lineWidth: 2
+        },
+        legend: {
+            enabled: true,
+            itemStyle: {
+                    color: '#000',
+                    fontFamily: 'MuseoS500'
+            }
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br/>',
+            pointFormat: '{point.x} s: $ {point.y:,.0f}'
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enable: false
+                }
+            }
+        },
+        series: [
+{{ series_data|safe }}
+        ]
+    });
+});
+</script>
+<h3>Adjust The Model Parameters</h3>
+<form action=/ method=get>
+<p>Hull Dry Mass (kg): <select name=dry_mass>
+    <option selected value=40000>40,000kg (40T)</option>
+    <option value=20000>20,000kg (20T)</option>
+    <option value=100000>100,000kg (100T)</option>
+    </select>
+<p>Cost To Launch Water To LEO ($/kg): <select name=water_cost>
+    <option selected value=1700>$1,700/kg (Falcon 9 Heavy)</option>
+    <option value=1200>$1,200/kg (Falcon 9 Reusable, ~30% Savings)</option>
+    <option value=600>$600/kg (Falcon 9 Reusable, ~65% Savings)</option>
+</select></p>
+<p>Ship Fabrication Cost (Launch Cost Calculated Automatically): <select name=fabrication_cost>
+    <option selected value=200000000>$200,000,000</option>
+    <option value=500000000>$500,000,000</option>
+    <option value=1000000000>$1,000,000,000</option>
+</select>    
+</p>
+<p>Missions Per Ship Lifetime: <select name=num_missions>
+    <option selected value=10>10 Missions (20 Years)</option>
+    <option value=5>5 Missions (10 Years)</option>
+    <option value=15>15 Missions (30 Years)</option>
+</select>
+</p>
+<p><input type=submit value="Redraw Graph"></p>
+</form>
+</body>
+</html>
