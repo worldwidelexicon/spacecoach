@@ -10,4 +10,4 @@ builtins:
 handlers:
 
 - url: .*
-  script: spacecoach.app
+  script: main.app
