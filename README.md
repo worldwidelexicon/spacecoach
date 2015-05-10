@@ -7,8 +7,11 @@ This parametric model is used to generate the graphs at spacecoachmodels.appspot
 USAGE:
 
 from spacecoach import spacecoach
+
 s = spacecoach(mass=40000, water_cost=1700) # for a 40,000 kg ship with Falcon 9 Heavy water delivery to LEO
+
 print s.data
+
 
 When you initialize the spacecoach class, it will calculate costs for a variety of missions across a range
 of values for specific impulse. This data is stored as a two dimensional dictionary array in the data property
