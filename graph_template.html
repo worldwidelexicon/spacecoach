@@ -8,6 +8,15 @@
 
 <div id="container" style="min-width: 800px; height: 600px; margin: 0 auto"></div>
 
+<h3>Spacecoach Economic Model</h3>
+
+<p>While researching this concept for the upcoming Springer book, we developed a parametric model that predicts
+approximate per mission costs as a function of several major parameters. We then graph projected costs for a variety
+of sample missions, including high delta-v missions such as Ceres, and plot overall mission costs as a function of
+specific impulse (one of the primary cost drivers in the model).</p>
+<p>What the models show is that even ambitious missions to the Asteroid Belt will be feasible and affordble (less
+expensive than a Shuttle mission), and can be done entirely using water launched from the Earth using existing
+launch systems (no in situ resource utilization required).</p>
 <script>
 $(function () {
     $('#container').highcharts({
@@ -84,16 +93,27 @@ $(function () {
     <option value=20000>20,000kg (20T)</option>
     <option value=100000>100,000kg (100T)</option>
     </select>
+<p>Cost To Launch Equipment To LEO ($/kg): <select name=leo_cost>
+    <option selected value=1700>$1,700/kg (Falcon 9 Heavy)</option>
+    <option value=1200>$1,200/kg (Falcon 9R, slightly used, ~30% Savings)</option>
+    <option value=600>$600/kg (Falcon 9R, heavily used, ~65% Savings)</option>
+</select>
+</p>
 <p>Cost To Launch Water To LEO ($/kg): <select name=water_cost>
     <option selected value=1700>$1,700/kg (Falcon 9 Heavy)</option>
-    <option value=1200>$1,200/kg (Falcon 9 Reusable, ~30% Savings)</option>
-    <option value=600>$600/kg (Falcon 9 Reusable, ~65% Savings)</option>
+    <option value=1200>$1,200/kg (Falcon 9R, slightly used, ~30% Savings)</option>
+    <option value=600>$600/kg (Falcon 9R, heavily used, ~65% Savings)</option>
 </select></p>
 <p>Ship Fabrication Cost (Launch Cost Calculated Automatically): <select name=fabrication_cost>
     <option selected value=200000000>$200,000,000</option>
     <option value=500000000>$500,000,000</option>
     <option value=1000000000>$1,000,000,000</option>
 </select>    
+</p>
+<p>Cost To Launch Crew, Last Minute Equipment & Perishables Direct To EML-2: <select name=crew_cost>
+    <option selected value=105000000>$105,000,000 (Falcon 9 Heavy)</option>
+    <option value=200000000>$200,000,000 Other</option>
+</select>
 </p>
 <p>Missions Per Ship Lifetime: <select name=num_missions>
     <option selected value=10>10 Missions (20 Years)</option>

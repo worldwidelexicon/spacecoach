@@ -27,17 +27,27 @@ class PageServer(webapp2.RequestHandler):
     def get(self):
         dry_mass = self.request.get('dry_mass')
         if len(dry_mass) > 0:
-            dry_mass = int(dry_mass)
+            dry_mass = float(dry_mass)
         else:
             dry_mass = 40000
         water_cost = self.request.get('water_cost')
         if len(water_cost) > 0:
-            water_cost = int(water_cost)
+            water_cost = float(water_cost)
         else:
             water_cost = 1700
+        leo_cost = self.request.get('leo_cost')
+        if len(leo_cost) > 0:
+            leo_cost = float(leo_cost)
+        else:
+            leo_cost = 1700
+        crew_cost = self.request.get('crew_cost')
+        if len(crew_cost) > 0:
+            crew_cost = float(crew_cost)
+        else:
+            crew_cost = 105000000
         fabrication_cost = self.request.get('fabrication_cost')
         if len(fabrication_cost) > 0:
-            fabrication_cost = int(fabrication_cost)
+            fabrication_cost = float(fabrication_cost)
         else:
             fabrication_cost = 200000000
         num_missions = self.request.get('num_missions')
@@ -45,7 +55,8 @@ class PageServer(webapp2.RequestHandler):
             num_missions = int(num_missions)
         else:
             num_missions = 10
-        s = spacecoach(num_missions=num_missions,fabrication_cost=fabrication_cost,mass=dry_mass, water_cost=water_cost)
+        s = spacecoach(num_missions=num_missions,fabrication_cost=fabrication_cost,mass=dry_mass, water_cost=water_cost, crew_cost=crew_cost,
+                       leo_cost=leo_cost)
         self.response.out.write(render('graph_template.html', s.template_data))
 
 app = webapp2.WSGIApplication([("/", PageServer)], debug=True)
