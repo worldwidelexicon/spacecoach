@@ -25,10 +25,6 @@ import math
 import os
 import string
 
-def render(template_name, data):
-    path = os.path.join(os.path.dirname(__file__), template_name)
-    return template.render(path, data)
-
 class spacecoach():
     def __init__(self, mass = 40000, low_isp = 1000, high_isp = 5000, low_dv = 1000, high_dv = 30000, interval = 5000, leo_cost=1700.0,
                  water_cost = 1700.0, num_missions=10, crew_cost=105000000, fabrication_cost = 200000000):
