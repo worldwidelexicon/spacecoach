@@ -11,14 +11,17 @@
 #
 # s = spacecoach()
 # data = s.data
-# costs = s.costs
-# highcharts_data = s.highcharts
+# highcharts_series_data = s.template_data
 #
 # NOTE you can override the default values if you want. On initialization, the class will
 # generate data that can be plotted graphically. Each series graphs the propellant ratio (to dry hull)
 # as a function of delta V for specific impulse ranging from 1000s to 5000s (you can expand the range
 # if you want). For each Isp value, it also graphs the propellant ratio for inbound ISRU, versus all
 # water supplied from Earth, to show the impact of partial ISRU on mission costs.
+#
+# NOTE this program has been updated to run on Google App Engine using Django templates. I'll be working
+# to "prettify" this in the next update, as well as add drilldown options so you can get a detailed breakdown
+# of costs for a specific mission as a function of delta-v. 
 #
 
 import math
