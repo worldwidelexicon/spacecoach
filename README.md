@@ -20,14 +20,16 @@ of the class.
 The method generate_html() converts the data into a data series that can be imported into a highcharts spline
 graph (we use this in the interactive graphing tool at spacecoachmodels.appspot.com)
 
+The delta-v values for each mission are approximate, and assume low thrust propulsion to/from EML-2 and the destination. This is sufficient for general estimation, but you'll want to do a numerical simulation using a tool like STK to get exact delta-v numbers.
+
 The parametric model accounts for the following factors:
 
-* The cost of fabricating the ship (default: 200,000,000)
-* The number of missions per ship service life (default: 10)
+* The cost of fabricating the ship (default: $200,000,000)
+* The number of missions per ship service life (default: 10 missions)
 * The cost of launching non-water material and equipment to low earth orbit (default: $1700 for Falcon 9 Heavy)
 * The cost of launching water to low earth orbit (default: $1700 for Falcon 9 Heavy)
 * The cost of launching crew, perishables and last minute supplies via Falcon 9 Heavy on via chemical propulsion (default: $105,000,000)
-* Engine specific impulse, used to calculate the cost of boosting material to EML-2 via electric propulsion
+* Engine specific impulse, used to calculate the cost of boosting material to EML-2 via electric propulsion (assume ~ 7 km/s to spiral out from LEO to EML-2)
 * Engine specific impulse, used to calculate mass budget for the interplanetary trip
 * Calculates total mission cost across a range of specific impulse from 1,000s to 5,000s
 
