@@ -30,7 +30,7 @@ import string
 
 class spacecoach():
     def __init__(self, mass = 40000, low_isp = 1000, high_isp = 5000, low_dv = 1000, high_dv = 30000, interval = 5000, leo_cost=1700.0,
-                 water_cost = 1700.0, num_missions=10, crew_cost=105000000, fabrication_cost = 200000000):
+                 water_cost = 1700.0, num_missions=10, crew_cost=105000000, fabrication_cost = 200000000, water_delivered=40000):
         self.dry_mass = mass
         self.low_isp = low_isp
         self.high_isp = high_isp
@@ -38,6 +38,7 @@ class spacecoach():
         self.high_dv = high_dv
         self.leo_cost = leo_cost
         self.water_cost = water_cost
+        self.water_delivered = water_delivered
         self.eml2_dv = 7000
         self.data = None
         self.costs = None
@@ -69,7 +70,9 @@ class spacecoach():
                 per_kg = self.leo_cost * math.pow(2.718, (self.eml2_dv / (9.81 * isp)))
                 per_kg_water = per_kg * (self.water_cost / self.leo_cost)
                 ship = (self.fabrication_cost + (self.dry_mass * per_kg)) / self.num_missions
-                propellant = (self.dry_mass * pr) * per_kg_water
+                water_launches = (int(self.dry_mass * pr) / int(self.water_delivered)) + 1
+                #propellant = (self.dry_mass * pr) * per_kg_water
+                propellant = (water_launches * 90000000) * (float(self.water_cost)/float(self.leo_cost))
                 crew = self.crew_cost
                 total = ship + propellant + crew
                 values.append(dict(
@@ -109,7 +112,7 @@ class spacecoach():
             if row < len(self.data):
                 chart_data += '\n,'
             row += 1
-        subtitle = str(self.dry_mass) + ' kg dry hull, ' + str(self.num_missions) + ' mission lifetime, $' + str(int(self.leo_cost)) + '/kg equip/crew to LEO, $' + str(int(self.water_cost)) + '/kg water to LEO, $' + str(self.fabrication_cost) + ' ship fabrication cost'
+        subtitle = str(self.dry_mass) + ' kg dry hull, ' + str(self.num_missions) + ' mission lifetime, $' + str(int(self.leo_cost)) + '/kg equip/crew to LEO, $' + str(int(self.water_cost)) + '/kg water to LEO, ' + str(self.water_delivered) + 'kg of water per F9H to LEO, $' + str(self.fabrication_cost) + ' ship fabrication cost'
         data = dict(
             subtitle = subtitle,
             series_data = chart_data,

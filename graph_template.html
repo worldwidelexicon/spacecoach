@@ -29,7 +29,7 @@ $(function () {
             inverted: false
         },
         title: {
-            text: 'Cost Per Mission Vs Isp'
+            text: 'Cost Per Mission Vs Isp (Departing To/From EML-2 or similar point)'
         },
         subtitle: {
             text: '{{ subtitle }}'
@@ -52,7 +52,7 @@ $(function () {
             title: {
                 text: '$/mission'
             },
-            type: 'logarithmic',
+            //type: 'logarithmic',
             pointFormat: "Value: {point.y:,.0f}",
             labels: {
                 format: '{value:,.0f}',
@@ -103,6 +103,11 @@ $(function () {
     <option selected value=1700>$1,700/kg (Falcon 9 Heavy)</option>
     <option value=1200>$1,200/kg (Falcon 9R, slightly used, ~30% Savings)</option>
     <option value=600>$600/kg (Falcon 9R, heavily used, ~65% Savings)</option>
+</select></p>
+<p>Water Delivered To LEO Per Falcon 9 Heavy Launch (kg): <select name=water_delivered>
+    <option value=50000>50,0000kg, 3,000kg allocated for equipment, engines, etc</option>
+    <option selected value=40000>40,000kg, 13,000kg allocated for equipment, engines, etc</option>
+    <option sleected value=30000>30,000kg, 23,000kg allocated for equipment, engines, etc</option>
 </select></p>
 <p>Ship Fabrication Cost (Launch Cost Calculated Automatically): <select name=fabrication_cost>
     <option selected value=200000000>$200,000,000</option>

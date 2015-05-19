@@ -35,6 +35,11 @@ class PageServer(webapp2.RequestHandler):
             water_cost = float(water_cost)
         else:
             water_cost = 1700
+        water_delivered = self.request.get('water_delivered')
+        if len(water_delivered) > 0:
+            water_delivered = int(water_delivered)
+        else:
+            water_delivered = 40000
         leo_cost = self.request.get('leo_cost')
         if len(leo_cost) > 0:
             leo_cost = float(leo_cost)
@@ -56,7 +61,7 @@ class PageServer(webapp2.RequestHandler):
         else:
             num_missions = 10
         s = spacecoach(num_missions=num_missions,fabrication_cost=fabrication_cost,mass=dry_mass, water_cost=water_cost, crew_cost=crew_cost,
-                       leo_cost=leo_cost)
+                       leo_cost=leo_cost, water_delivered=water_delivered)
         self.response.out.write(render('graph_template.html', s.template_data))
 
 app = webapp2.WSGIApplication([("/", PageServer)], debug=True)
