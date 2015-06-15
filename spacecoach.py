@@ -29,7 +29,7 @@ import os
 import string
 
 class spacecoach():
-    def __init__(self, mass = 40000, low_isp = 1000, high_isp = 5000, low_dv = 1000, high_dv = 30000, interval = 5000, leo_cost=1700.0,
+    def __init__(self, mass = 40000, low_isp = 1500, high_isp = 5000, low_dv = 1000, high_dv = 30000, interval = 5000, leo_cost=1700.0,
                  water_cost = 1700.0, num_missions=10, crew_cost=105000000, fabrication_cost = 200000000, water_delivered=40000):
         self.dry_mass = mass
         self.low_isp = low_isp
@@ -49,11 +49,10 @@ class spacecoach():
         self.missions = [
             {'name':'NEO', 'dv':3000},
             {'name':'cislunar', 'dv':5000},
-            {'name':'mars ISRU inbound', 'dv':7500},
-            {'name':'ceres ISRU inbound', 'dv':12500},
             {'name':'mars', 'dv':15000},
-            {'name':'venus', 'dv':20000},
-            {'name':'ceres', 'dv':25000}]
+            {'name':'ceres', 'dv':26500},
+            {'name':'venus', 'dv':26900},
+            {'name':'mercury', 'dv':44000}]
         self.data = self.generate_data(low_isp = low_isp, high_isp = high_isp, low_dv = low_dv,
                                         high_dv = high_dv, interval = interval)
         self.generate_html()
