@@ -22,6 +22,17 @@ from spacecoach import spacecoach
 def render(template_name, data):
     path = os.path.join(os.path.dirname(__file__), template_name)
     return template.render(path, data)
+    
+class EngineData(db.Model):
+    email = db.StringProperty(default='')
+    test_date = db.StringProperty(default='')
+    engine_type = db.StringProperty(default='')
+    propellant = db.StringProperty(default='')
+    specific_impulse = db.FloatProperty(default=0)
+    power = db.FloatProperty(default=0)
+    thrust = db.FloatProperty()
+    efficiency = db.FloatProperty()
+    url = db.StringProperty(default='')
 
 class PageServer(webapp2.RequestHandler):
     def get(self):
