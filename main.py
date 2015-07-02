@@ -33,6 +33,36 @@ class EngineData(db.Model):
     thrust = db.FloatProperty()
     efficiency = db.FloatProperty()
     url = db.StringProperty(default='')
+    
+class EngineDataHandler(webapp2.RequestHandler):
+    def get(self):
+        pass
+    def post(self):
+        email = self.request.get('email')
+        test_date = self.request.get('test_date')
+        engine_type = self.request.get('engine_type')
+        propellant = self.request.get('propellant')
+        specific_impulse = float(self.request.get('specific_impulse'))
+        power = float(self.request.get('power'))
+        thrust = float(self.request.get('thrust'))
+        efficiency = float(self.request.get('efficiency'))
+        url = self.request.get('url')
+        if len(email) > 4 and len(test_date) > 8 and len(engine_type) > 0 and len (propellant) > 0:
+            data = EngineData()
+            data.email = email
+            data.test_date = test_date
+            data.engine_type = engine_type
+            data.propellant = propellant
+            data.specific_impulse = specific_impulse
+            data.power = power
+            data.thrust = thrust
+            data.efficiency = efficiency
+            data.url = url
+            data.put()
+            # serve data accepted message, display input form again
+        else:
+            self.error(400)
+            # serve invalid data page
 
 class PageServer(webapp2.RequestHandler):
     def get(self):
