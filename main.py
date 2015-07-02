@@ -36,8 +36,16 @@ class EngineData(db.Model):
     
 class EngineDataHandler(webapp2.RequestHandler):
     def get(self):
-        pass
+        html = """
+        <form action=/enginedata method=post>
+        <table>
+        <tr><td>Secret</td><td><input type=text name=secret></td></tr>
+        </table>
+        </form>
+        """
+        self.response.out.write(html)
     def post(self):
+        secret = self.request.get('secret')
         email = self.request.get('email')
         test_date = self.request.get('test_date')
         engine_type = self.request.get('engine_type')
@@ -47,7 +55,7 @@ class EngineDataHandler(webapp2.RequestHandler):
         thrust = float(self.request.get('thrust'))
         efficiency = float(self.request.get('efficiency'))
         url = self.request.get('url')
-        if len(email) > 4 and len(test_date) > 8 and len(engine_type) > 0 and len (propellant) > 0:
+        if len(email) > 4 and len(test_date) > 8 and len(engine_type) > 0 and len (propellant) > 0 and secret == 'littlebirdy':
             data = EngineData()
             data.email = email
             data.test_date = test_date
